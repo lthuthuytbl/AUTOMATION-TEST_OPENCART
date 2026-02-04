@@ -1,0 +1,262 @@
+/* =========================================
+   GLOBAL STYLES & TYPOGRAPHY
+   ========================================= */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px; /* Tăng size chữ lên cho dễ đọc */
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f7f6; /* Màu nền xám nhẹ dịu mắt */
+  margin: 0;
+  padding: 20px;
+  min-width: 1024px; /* Đảm bảo hiển thị tốt trên PC */
+}
+
+h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 18px;
+  color: #34495e;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
+}
+
+p {
+  color: #555;
+}
+
+a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #1d6fa5;
+  text-decoration: underline;
+}
+
+/* =========================================
+   SUMMARY SECTION (CARD STYLE)
+   ========================================= */
+.summary {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.summary__data {
+  flex: 1;
+}
+
+.controls {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.filters input {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/* Biến các text filter thành dạng Badge/Tag */
+.filters span {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* =========================================
+   STATUS COLORS (MODERN PALETTE)
+   ========================================= */
+/* Passed: Green */
+span.passed, .passed .col-result {
+  color: #27ae60;
+  background-color: rgba(39, 174, 96, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Skipped/XFailed: Orange */
+span.skipped, span.xfailed, span.rerun, 
+.skipped .col-result, .xfailed .col-result, .rerun .col-result {
+  color: #f39c12;
+  background-color: rgba(243, 156, 18, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Failed/Error: Red */
+span.error, span.failed, span.xpassed, 
+.error .col-result, .failed .col-result, .xpassed .col-result {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* =========================================
+   TABLE STYLES
+   ========================================= */
+table {
+  width: 100%;
+  border-collapse: separate; /* Để bo góc được */
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #34495e;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  cursor: pointer; /* Cho biết cột có thể sort */
+}
+
+/* Hover effect cho từng dòng */
+tr.collapsible:hover td {
+  background-color: #f9fbfd;
+  cursor: pointer;
+}
+
+/* Xóa border dưới cùng */
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Cột Result căn giữa hoặc chỉnh lại cho đẹp */
+.col-result {
+  width: 120px;
+  text-align: center;
+}
+
+/* =========================================
+   LOGS & DETAILS (EXPANDED VIEW)
+   ========================================= */
+.logwrapper {
+  background-color: #2d2d2d; /* Nền tối cho log giống VS Code */
+  color: #f8f8f2;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #444;
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 13px;
+  overflow-x: auto;
+}
+
+.logwrapper .log {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Nút Expand/Collapse */
+.logwrapper .logexpander {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: inline-block;
+  transition: background 0.2s;
+}
+
+.logwrapper .logexpander:hover {
+  background-color: #666;
+}
+
+/* =========================================
+   ENVIRONMENT TABLE
+   ========================================= */
+#environment {
+  margin-bottom: 30px;
+}
+
+#environment td {
+  border: 1px solid #eee;
+}
+
+#environment tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+#environment-header h2 {
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* =========================================
+   MEDIA / SCREENSHOTS
+   ========================================= */
+div.media {
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+
+.media-container__viewport img {
+  border-radius: 4px;
+}
+
+/* =========================================
+   UTILITIES & EXTRAS
+   ========================================= */
+.sortable:after {
+  opacity: 0.6;
+}
+
+.summary__reload__button {
+  background-color: #27ae60;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.1s;
+}
+
+.summary__reload__button:hover {
+  background-color: #219150;
+  transform: translateY(-1px);
+}
+
+.hidden {
+  display: none !important;
+}
