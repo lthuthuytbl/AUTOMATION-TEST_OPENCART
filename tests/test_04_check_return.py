@@ -27,17 +27,13 @@ def test_tc04_check_return_history(page: Page):
     # 3. Xem chi tiết đơn đầu tiên
     acc_p.view_first_return_record()
     
-    # 4. Verify (PHẦN QUAN TRỌNG NHẤT)
+    # 4. Verify
     print("Check: Kiem tra xem da vao trang chi tiet chua...")
     
-    # MẸO: Chờ hẳn 2 giây cho trang ổn định (cho chắc ăn)
     page.wait_for_timeout(2000)
 
-    # CHIẾN THUẬT MỚI: Kiểm tra dòng chữ "Return ID"
-    # Dòng này chỉ xuất hiện khi đã vào trong trang chi tiết
     expect(page.get_by_text("Return ID", exact=False).first).to_be_visible(timeout=10000)
     
-    # Kiểm tra thêm dòng "Return Reason" cho chắc chắn
     expect(page.get_by_text("Reason for Return")).to_be_visible()
 
     print("   -> OK: Da thay 'Return ID' & 'Reason' -> Chinh xac la trang chi tiet!")

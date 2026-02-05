@@ -3,7 +3,7 @@ from pages.base_page import BasePage
 class LoginPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
-        # Locator lấy từ code record của bạn
+        # Locator lấy từ code record 
         self.email_input = page.get_by_role("textbox", name="E-Mail Address")
         self.password_input = page.get_by_role("textbox", name="Password")
         self.login_btn = page.get_by_role("button", name="Login")

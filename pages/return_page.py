@@ -23,7 +23,6 @@ class ReturnPage(BasePage):
         self.comment_input = page.locator("#input-comment")
         self.submit_btn = page.locator(".btn.btn-primary")
 
-    # --- CÁC HÀM HỖ TRỢ ---
 
     def prepare_form_basics(self):
         """Hàm phụ: Cuộn trang và tick các mục bắt buộc (Dùng cho cả Test 01 và 03)"""
@@ -31,16 +30,12 @@ class ReturnPage(BasePage):
         self.page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         self.page.wait_for_timeout(500)
         
-        # Tick chọn Lý do
         if self.reason_text.is_visible():
             self.reason_text.click(force=True)
         
-        # Tick chọn Yes
         if self.opened_yes_text.is_visible():
             self.opened_yes_text.click(force=True)
 
-    # --- HÀM 1: DÙNG CHO TEST 01 (Happy Case) ---
-    # (Đây là hàm bạn bị thiếu lúc nãy)
     def fill_return_form(self, comment):
         print("Action: Dien form tra hang day du (Happy Case)")
         
@@ -51,7 +46,6 @@ class ReturnPage(BasePage):
         print(f"Action: Dien ghi chu: {comment}")
         self.comment_input.fill(comment)
 
-    # --- HÀM 2: DÙNG CHO TEST 03 (Sửa thông tin/Săn Bug) ---
     def edit_personal_info(self, firstname, lastname):
         print(f"Action: Doi Ten thanh '{firstname}', Ho thanh '{lastname}'")
         self.firstname_input.fill(firstname)
@@ -68,7 +62,6 @@ class ReturnPage(BasePage):
             print(f"Action: Doi So Luong thanh '{quantity}'")
             self.quantity_input.fill(str(quantity))
 
-    # --- HÀM SUBMIT (DÙNG CHUNG) ---
     def submit(self):
         print("Action: Bam nut Submit")
         self.submit_btn.click(force=True)

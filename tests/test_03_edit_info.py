@@ -9,10 +9,8 @@ from pages.return_page import ReturnPage
 BASE_URL = "http://localhost/opencart_test/index.php?route=account/login"
 EMAIL = "thuthuylac79@gmail.com"
 PASSWORD = "ThuThuyLac99"
-# Dòng thông báo chính xác bạn vừa gửi
 SUCCESS_MSG = "Thank you for submitting your return request" 
 
-# --- HÀM KIỂM TRA "SĂN BUG" ---
 def check_negative_case(page, test_name):
     """
     Dùng cho các case nhập SAI.
@@ -21,16 +19,15 @@ def check_negative_case(page, test_name):
     print(f"Check: Dang kiem tra xem he thong co lo tay chap nhan {test_name} khong...")
     page.wait_for_timeout(1000)
     
-    # Tìm dòng chữ "Thank you..."
     if page.get_by_text(SUCCESS_MSG).is_visible():
-        # Nếu thấy -> Nghĩa là hệ thống nhận đơn sai -> BUG
+       
         pytest.fail(f">>> BUG FOUND: He thong da chap nhan tra hang du {test_name}!")
     else:
-        # Nếu không thấy -> Nghĩa là hệ thống đã chặn lại -> TỐT
+    
         print(f"   -> OK: He thong da chan lai (Khong hien Success).")
 
 # =========================================================================
-# CASE A: TEST LỖI - TÊN RỖNG (Mong đợi chặn lại)
+# CASE A: TEST LỖI - TÊN RỖNG
 # =========================================================================
 def test_tc03_case_a_empty_name(page: Page):
     print("\n--- [CASE A] Test: Ten Rong ---")
@@ -42,13 +39,13 @@ def test_tc03_case_a_empty_name(page: Page):
     login_p.login(EMAIL, PASSWORD)
     acc_p.go_to_order_history()
     acc_p.go_to_return_form()
-    return_p.prepare_form_basics() # Tick lý do trước
+    return_p.prepare_form_basics() 
 
     # Action: Xóa tên
     return_p.edit_personal_info(firstname="", lastname="Lac")
     return_p.submit()
 
-    # Check Bug (Nếu thấy Success là Fail)
+    # Check Bug 
     check_negative_case(page, "TEN RONG")
     
     # Kiểm tra thêm: Phải hiện lỗi text đỏ
@@ -56,7 +53,7 @@ def test_tc03_case_a_empty_name(page: Page):
         expect(page.get_by_text("First Name must be between")).to_be_visible()
 
 # =========================================================================
-# CASE B: TEST LỖI - SỐ LƯỢNG = 0 (Mong đợi chặn lại)
+# CASE B: TEST LỖI - SỐ LƯỢNG = 0 
 # =========================================================================
 def test_tc03_case_b_zero_quantity(page: Page):
     print("\n--- [CASE B] Test: So Luong = 0 ---")
@@ -78,7 +75,7 @@ def test_tc03_case_b_zero_quantity(page: Page):
     check_negative_case(page, "SO LUONG = 0")
 
 # =========================================================================
-# CASE C: TEST LỖI - NGÀY TƯƠNG LAI (Mong đợi chặn lại)
+# CASE C: TEST LỖI - NGÀY TƯƠNG LAI
 # =========================================================================
 def test_tc03_case_c_future_date(page: Page):
     print("\n--- [CASE C] Test: Ngay Tuong Lai ---")
@@ -99,11 +96,11 @@ def test_tc03_case_c_future_date(page: Page):
     return_p.edit_order_info(date_ordered=tomorrow)
     return_p.submit()
 
-    # Check Bug: Nếu hệ thống nhận ngày mai -> BÁO LỖI ĐỎ NGAY
+    # Check Bug: Nếu hệ thống nhận ngày mai 
     check_negative_case(page, f"NGAY TUONG LAI ({tomorrow})")
 
 # =========================================================================
-# CASE D: TEST THÀNH CÔNG - NHẬP ĐÚNG (Mong đợi Success)
+# CASE D: TEST THÀNH CÔNG - NHẬP ĐÚNG 
 # =========================================================================
 def test_tc03_case_d_valid_submit(page: Page):
     print("\n--- [CASE D] Test: Nhap Dung ---")

@@ -26,12 +26,10 @@ def test_tc01_submit_return_happy_case(page: Page):
 
     # Checkpoint
     print("--- Checkpoint: Dang o trang Returns ---")
-    # Chờ tiêu đề Returns hiện ra để chắc chắn đã vào form
     expect(page.locator("h1")).to_contain_text("Returns")
 
     # 3. Điền form
     print("--- Buoc 3: Dien thong tin ---")
-    # Hàm này nãy bạn đã sửa ok rồi
     return_p.fill_return_form("Test Automation - Hang bi hong (Happy Case)")
     
     # 4. Submit
@@ -42,8 +40,7 @@ def test_tc01_submit_return_happy_case(page: Page):
     print("--- Buoc 5: Kiem tra ket qua ---")
     print(f"Check: Dang tim dong chu '{SUCCESS_TEXT}'...")
     
-    # THAY ĐỔI: Không chờ URL nữa, chờ thẳng Text xuất hiện
-    # timeout=10000 nghĩa là chờ tối đa 10 giây
+    
     expect(page.get_by_text(SUCCESS_TEXT)).to_be_visible(timeout=10000)
     
     print("\n>>> SUCCESS: CHUC MUNG! TEST CASE 01 DA PASSED (Da thay thong bao Thank You)!")
